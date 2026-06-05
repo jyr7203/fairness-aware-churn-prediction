@@ -24,12 +24,12 @@
 
 | 파일 | 설명 |
 |------|------|
-| `ortho_rwh.ipynb` | 전체 분석 노트북 (XGBoost · GLM 직교화/재가중, 공정성 평가, 리포트 생성) |
+| `ortho_rwh.ipynb` | 전체 분석 노트북 (XGBoost · GLM 직교화/재가중, 공정성 평가) |
 | `requirements.txt` | 의존 패키지 목록 |
 | `churn_model_xgb_final.pkl` | 학습된 XGBoost 모델 패키지 |
 | `churn_model_glm_final.pkl` | 학습된 GLM 모델 패키지 |
 
-> **데이터 미포함:** 원본 보험 계약 데이터(`*.pkl`)는 개인정보 보호를 위해 저장소에 포함하지 않습니다.
+> **데이터 미포함:** 원본 보험 계약 데이터(`*.pkl`)로 저장소에 포함하지 않습니다.
 
 ---
 
