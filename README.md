@@ -16,7 +16,7 @@
 
 - 직교화 임계값 `R²`는 **PR-AUC 하락 2% 이내** 제약을 만족하면서 **Avg FPR Gap이 최소**가 되는 값을 Pareto 탐색으로 선택합니다.
 - 분류 임계값(threshold)은 Base 모델의 validation(2018년) F1 최댓값 지점을 **모든 민감변수에 공통 고정**하여, 공정성 개선이 임계값 조정이 아니라 학습 단계 효과에서 나오도록 통제합니다.
-- 동일한 절차를 **XGBoost** 와 **GLM(로지스틱 회귀)** 두 모델에 적용합니다.
+- 최종 베이스라인으로 **XGBoost** 와 **GLM(로지스틱 회귀)** 을 확정하기에 앞서, LightGBM 등 여러 모델을 탐색하여 성능을 비교했습니다.
 
 ---
 
@@ -24,24 +24,22 @@
 
 | 파일 | 설명 |
 |------|------|
-| `ortho_rwh.ipynb` | 전체 분석 노트북 (XGBoost · GLM 직교화/재가중, 공정성 평가) |
-| `requirements.txt` | 의존 패키지 목록 |
+| `orthogonalization_xgb.ipynb` | XGBoost 공정성 개선 노트북 (직교화·후처리, 민감변수별 공정성 평가) |
+| `orthogonalization_glm.ipynb` | GLM 공정성 개선 노트북 (직교화·후처리, 민감변수별 공정성 평가) |
+| `lightgbm.ipynb` | 베이스라인 확정 전 탐색 노트북 (LightGBM, Optuna 하이퍼파라미터 튜닝 및 threshold 조정) |
 | `churn_model_xgb_final.pkl` | 학습된 XGBoost 모델 패키지 |
 | `churn_model_glm_final.pkl` | 학습된 GLM 모델 패키지 |
 
-> **데이터 미포함:** 원본 보험 계약 데이터(`*.pkl`)로 저장소에 포함하지 않습니다.
+> **데이터 미포함:** 원본 보험 계약 데이터(`*.csv` 등)는 저장소에 포함하지 않습니다. 노트북의 경로 설정 셀에서 본인 환경의 데이터 경로를 지정해 사용합니다.
 
 ---
 
 ## 실행 방법
 
-```bash
-pip install -r requirements.txt
-```
+주요 의존 패키지: `numpy`, `pandas`, `scipy`, `scikit-learn`, `xgboost`, `lightgbm`, `optuna`, `fairlearn`, `shap`, `matplotlib`, `seaborn`.
 
-1. 노트북 상단 **`3. 파일 경로 설정`** 셀의 `BASE_PATH` **한 곳만** 본인 환경에 맞게 수정합니다.
-   (모델·데이터·GLM 경로가 모두 `BASE_PATH`에서 파생됩니다.)
-2. 위에서부터 순서대로 실행합니다. (Google Colab + GPU 환경 기준으로 작성)
+1. 노트북 상단의 **파일 경로 설정** 셀에서 데이터·모델 경로를 본인 환경에 맞게 수정합니다.
+2. 위에서부터 순서대로 실행합니다. (Google Colab 환경 기준으로 작성)
 
 ---
 
