@@ -4,7 +4,7 @@ __pycache__/
 *.egg-info/
 .ipynb_checkpoints/
 
-# 원본 데이터 (저장소에 포함하지 않음)
+# 원본 데이터
 *.csv
 *.xlsx
 *.parquet
